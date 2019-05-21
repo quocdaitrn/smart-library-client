@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 
-import { getCurrentUser } from '../util/APIUtils';
+// import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
 import Login from '../user/login/Login';
@@ -15,7 +15,7 @@ import Profile from '../user/profile/Profile';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
-import Blank from '../blank/Blank'
+import Blank from '../blank/Blank';
 
 import { Layout, notification } from 'antd';
 const { Content } = Layout;
@@ -29,7 +29,7 @@ class App extends Component {
       isLoading: false
     }
     this.handleLogout = this.handleLogout.bind(this);
-    this.loadCurrentUser = this.loadCurrentUser.bind(this);
+    // this.loadCurrentUser = this.loadCurrentUser.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
 
     notification.config({
@@ -39,27 +39,27 @@ class App extends Component {
     });    
   }
 
-  loadCurrentUser() {
-    this.setState({
-      isLoading: true
-    });
-    getCurrentUser()
-    .then(response => {
-      this.setState({
-        currentUser: response,
-        isAuthenticated: true,
-        isLoading: false
-      });
-    }).catch(error => {
-      this.setState({
-        isLoading: false
-      });  
-    });
-  }
+  // loadCurrentUser() {
+  //   this.setState({
+  //     isLoading: true
+  //   });
+  //   getCurrentUser()
+  //   .then(response => {
+  //     this.setState({
+  //       currentUser: response,
+  //       isAuthenticated: true,
+  //       isLoading: false
+  //     });
+  //   }).catch(error => {
+  //     this.setState({
+  //       isLoading: false
+  //     });  
+  //   });
+  // }
 
-  componentDidMount() {
-    this.loadCurrentUser();
-  }
+  // componentDidMount() {
+  //   this.loadCurrentUser();
+  // }
 
   handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
     localStorage.removeItem(ACCESS_TOKEN);
