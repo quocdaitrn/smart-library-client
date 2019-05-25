@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {
-  Link,
-  withRouter
+    Link,
+    withRouter
 } from 'react-router-dom';
 import './AppHeader.css';
-import pollIcon from '../poll.svg';
-import { Layout, Menu, Dropdown, Icon } from 'antd';
+import { AppContext }  from "../app/context";
+import { Layout, Menu, Dropdown, Icon, Row, Col, Button} from 'antd';
+import SearchBox from './SearchBox';
+
 const Header = Layout.Header;
 
 class AppHeader extends Component {

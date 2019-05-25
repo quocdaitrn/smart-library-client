@@ -6,7 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 
-// import { getCurrentUser } from '../util/APIUtils';
+import { getCurrentUser } from '../util/APIUtils';
 import { ACCESS_TOKEN } from '../constants';
 
 import Login from '../user/login/Login';
@@ -29,39 +29,39 @@ class App extends Component {
       isLoading: false
     }
     this.handleLogout = this.handleLogout.bind(this);
-    // this.loadCurrentUser = this.loadCurrentUser.bind(this);
+    this.loadCurrentUser = this.loadCurrentUser.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
 
     notification.config({
       placement: 'topRight',
       top: 70,
       duration: 3,
-    });    
+    });
   }
 
-  // loadCurrentUser() {
-  //   this.setState({
-  //     isLoading: true
-  //   });
-  //   getCurrentUser()
-  //   .then(response => {
-  //     this.setState({
-  //       currentUser: response,
-  //       isAuthenticated: true,
-  //       isLoading: false
-  //     });
-  //   }).catch(error => {
-  //     this.setState({
-  //       isLoading: false
-  //     });  
-  //   });
-  // }
+  loadCurrentUser() {
+    this.setState({
+      isLoading: true
+    });
+    getCurrentUser()
+      .then(response => {
+        this.setState({
+          currentUser: response,
+          isAuthenticated: true,
+          isLoading: false
+        });
+      }).catch(error => {
+        this.setState({
+          isLoading: false
+        });
+      });
+  }
 
-  // componentDidMount() {
-  //   this.loadCurrentUser();
-  // }
+  componentDidMount() {
+    this.loadCurrentUser();
+  }
 
-  handleLogout(redirectTo="/", notificationType="success", description="You're successfully logged out.") {
+  handleLogout(redirectTo = "/", notificationType = "success", description = "You're successfully logged out.") {
     localStorage.removeItem(ACCESS_TOKEN);
 
     this.setState({
@@ -70,7 +70,7 @@ class App extends Component {
     });
 
     this.props.history.push(redirectTo);
-    
+
     notification[notificationType]({
       message: 'Polling App',
       description: description,
@@ -87,31 +87,31 @@ class App extends Component {
   }
 
   render() {
-    if(this.state.isLoading) {
+    if (this.state.isLoading) {
       return <LoadingIndicator />
     }
     return (
-        <Layout className="app-container">
-          <AppHeader isAuthenticated={this.state.isAuthenticated} 
-            currentUser={this.state.currentUser} 
-            onLogout={this.handleLogout} />
+      <Layout className="app-container">
+        <AppHeader isAuthenticated={this.state.isAuthenticated}
+          currentUser={this.state.currentUser}
+          onLogout={this.handleLogout} />
 
-          <Content className="app-content">
-            <div className="container">
-              <Switch>      
-                <Route exact path="/" component={Blank}></Route>
-                <Route path="/login" 
-                  render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
-                </Route>
-                <Route path="/signup" component={Signup}></Route>
-                <Route path="/users/:username" 
-                  render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
-                </Route>
-                <Route component={NotFound}></Route>
-              </Switch>
-            </div>
-          </Content>
-        </Layout>
+        <Content className="app-content">
+          <div className="container">
+            <Switch>
+              <Route exact path="/" component={Blank}></Route>
+              <Route path="/login"
+                render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
+              </Route>
+              <Route path="/signup" component={Signup}></Route>
+              <Route path="/users/:username"
+                render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props} />}>
+              </Route>
+              <Route component={NotFound}></Route>
+            </Switch>
+          </div>
+        </Content>
+      </Layout>
     );
   }
 }

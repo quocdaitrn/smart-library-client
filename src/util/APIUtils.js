@@ -24,26 +24,49 @@ const request = (options) => {
 };
 
 export function login(loginRequest) {
-    return {};
+    return request({
+        url: API_BASE_URL + "/auth/signin",
+        method: 'POST',
+        body: JSON.stringify(loginRequest)
+    });
 }
 
 export function signup(signupRequest) {
-    return {};
+    return request({
+        url: API_BASE_URL + "/auth/signup",
+        method: 'POST',
+        body: JSON.stringify(signupRequest)
+    });
 }
 
 export function checkUsernameAvailability(username) {
-    return {};
+    return request({
+        url: API_BASE_URL + "/users/checkUsernameAvailability?username=" + username,
+        method: 'GET'
+    });
 }
 
 export function checkEmailAvailability(email) {
-    return {};
+    return request({
+        url: API_BASE_URL + "/users/checkEmailAvailability?email=" + email,
+        method: 'GET'
+    });
 }
 
-
 export function getCurrentUser() {
-    return {};
+    if(!localStorage.getItem(ACCESS_TOKEN)) {
+        return Promise.reject("No access token set.");
+    }
+
+    return request({
+        url: API_BASE_URL + "/users/me",
+        method: 'GET'
+    });
 }
 
 export function getUserProfile(username) {
-    return {};
+    return request({
+        url: API_BASE_URL + "/users/" + username,
+        method: 'GET'
+    });
 }
