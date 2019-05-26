@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import SectionRepository from '../../repositories/SectionRepository';
@@ -7,50 +7,50 @@ import {
     withRouter
 } from 'react-router-dom';
 
-class Poppular extends Component{
+class Poppular extends Component {
     size = 5;
 
-    constructor(props){
+    constructor(props) {
         super(props);
     }
 
-    state={
-        PopularList:[]
+    state = {
+        PopularList: []
     }
 
-    componentDidMount(){
+    componentDidMount() {
         var PopularList = [];
         SectionRepository.getPopularList().then((res) => {
             res.data.map((item, key) => {
-                if ( key++ >= 5 ){
-                   return;
+                if (key++ >= 5) {
+                    return;
                 }
                 item.image = `images/find-place${key}.jpg`
                 PopularList.push(item);
             })
             this.setState({
-                PopularList:PopularList
+                PopularList: PopularList
             })
         })
     }
 
-    renderItem(item){
-        return item? <div onClick={() => {
+    renderItem(item) {
+        return item ? <div onClick={() => {
             this.props.history.push('sections?sid=' + item.id);
         }} className="find-place-img_wrap">
             <div className="grid">
                 <figure className="effect-ruby">
-                    <img src={item.image} className="img-fluid" alt="img13"/>
+                    <img src={item.image} className="img-fluid" alt="img13" />
                     <figcaption>
                         <h5> {item.name} </h5>
-                        <p> Địa điểm</p>
+                        <p>{item.itemsCount} Đầu sách</p>
                     </figcaption>
                 </figure>
             </div>
-        </div>:'';
+        </div> : '';
     }
 
-    render(){
+    render() {
         var PopularList = this.state.PopularList;
         return <section className="main-block">
             <div className="container">
@@ -73,19 +73,19 @@ class Poppular extends Component{
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                            {this.renderItem(PopularList[2])}
+                                {this.renderItem(PopularList[2])}
                             </div>
                         </div>
                     </div>
                     <div className="col-md-4">
                         <div className="row find-img-align">
                             <div className="col-md-12">
-                            {this.renderItem(PopularList[3])}
+                                {this.renderItem(PopularList[3])}
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-md-12">
-                            {this.renderItem(PopularList[4])}
+                                {this.renderItem(PopularList[4])}
                             </div>
                         </div>
                     </div>

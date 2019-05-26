@@ -70,3 +70,18 @@ export function getUserProfile(username) {
         method: 'GET'
     });
 }
+
+export function getItemById(id) {
+    return request({
+        url: API_BASE_URL + "/items/" + id,
+        method: 'GET'
+    });
+}
+
+export function makeLoan(loanRequest) {
+    return request({
+        url: API_BASE_URL + "/loans",
+        method: 'POST',
+        body: JSON.stringify(loanRequest)
+    });
+}

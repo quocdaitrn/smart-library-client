@@ -12,6 +12,8 @@ import { ACCESS_TOKEN } from '../constants';
 import Login from '../user/login/Login';
 import Signup from '../user/signup/Signup';
 import Profile from '../user/profile/Profile';
+import Section from '../section/Section';
+import Detail from '../item/detail/Detail';
 import AppHeader from '../common/AppHeader';
 import AppFooter from '../common/AppFooter';
 import NotFound from '../common/NotFound';
@@ -154,6 +156,12 @@ class App extends Component {
                             <Route exact path="/" render={(props) => <Blank />}></Route>
                             <Route path="/login"
                                 render={(props) => <Login onLogin={this.handleLogin} {...props} />}>
+                            </Route>
+                            <Route path="/sections"
+                                render={(props) => <Section {...props} />}>
+                            </Route>
+                            <Route path="/items/:id"
+                                render={(props) => <Detail isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props} />}>
                             </Route>
                             <Route path="/signup" component={Signup}></Route>
                             <Route path="/users/:username"

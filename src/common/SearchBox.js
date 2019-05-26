@@ -49,7 +49,7 @@ class SearchBox extends Component{
 
         var SectionList = this.state.SectionList;
         var selectAfter = (
-            <Select defaultValue={ this.query.sid } onChange={ (val) => { this.setState({ section_id: val }) } } defaultValue = "Tâm lý" style={{ width: 124 }}>
+            <Select defaultValue={ this.state.section_id } onChange={ (val) => { this.setState({ section_id: val }) } } style={{ width: 124 }}>
                 { SectionList.map((item,key) => {
                     return <Option key={key} value={item.id}>{item.name}</Option>
                 }) }

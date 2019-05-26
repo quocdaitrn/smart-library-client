@@ -1,0 +1,16 @@
+.main-block-section {
+    padding: 50px 0;
+}
+
+.ebook > a > img {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ebook > .tieude {
+    padding: 10px 1px;
+}
+
+.ebook > .tieude > a {
+    color: #686868;
+}
