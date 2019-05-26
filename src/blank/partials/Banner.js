@@ -1,16 +1,17 @@
 import React,{Component} from 'react';
 import SearchBox from '../../common/SearchBox';
 import Settings from '../../repositories/Settings';
+
 export default class  Banner extends Component {
     constructor(props){
         super(props);
         this.state = {
-            background:null
+            background: null
         }
     }
 
     componentDidMount(){
-        Settings.get().then((res)=>{
+        Settings.get().then((res) => {
             this.setState({
                 background:res.data.background
             })
@@ -23,8 +24,8 @@ export default class  Banner extends Component {
     };
     if(this.state.background){
         style = {
-            backgroundSize:'cover',
-            backgroundImage:`url(${this.state.background})`
+            backgroundSize: 'cover',
+            backgroundImage: `url(${this.state.background})`
         }
     }
     return <section style={style} className="slider home-banner d-flex align-items-center">
@@ -35,8 +36,8 @@ export default class  Banner extends Component {
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="slider-content_wrap">
-                                    <h1 className="title-banner">Tìm hiểu thực tế các chuyến đi</h1>
-                                    <h5>Tại 63 tỉnh thành trên cả nước</h5>
+                                    <h1 className="title-banner">Khám khá kho tàng tri thức nhân loại</h1>
+                                    <h5>Tại thư viện thông minh Smart Library</h5>
                                 </div>
                             </div>
                         </div>

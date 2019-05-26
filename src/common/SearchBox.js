@@ -69,7 +69,7 @@ class SearchBox extends Component{
         )
         } else {
             return (<Search
-                placeholder="Bạn muốn đi đâu?"
+                placeholder="Bạn muốn xem sách gì?"
                 onSearch={value => this.handleSearch(value)}
                 enterButton
                 className={'search-home'}

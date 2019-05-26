@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'antd';
-import ProvinceRepository from '../../repositories/ProvinceRepository';
+import SectionRepository from '../../repositories/SectionRepository';
 import {
     Link,
     withRouter
@@ -20,9 +20,9 @@ class Poppular extends Component{
 
     componentDidMount(){
         var PopularList = [];
-        ProvinceRepository.getPopularList().then((res)=>{
-            res.data.map((item,key)=>{
-                if(key++>=5){
+        SectionRepository.getPopularList().then((res) => {
+            res.data.map((item, key) => {
+                if ( key++ >= 5 ){
                    return;
                 }
                 item.image = `images/find-place${key}.jpg`
@@ -35,15 +35,15 @@ class Poppular extends Component{
     }
 
     renderItem(item){
-        return item?<div onClick={()=>{
-            this.props.history.push('maps?pid='+item.id);
+        return item? <div onClick={() => {
+            this.props.history.push('sections?sid=' + item.id);
         }} className="find-place-img_wrap">
             <div className="grid">
                 <figure className="effect-ruby">
                     <img src={item.image} className="img-fluid" alt="img13"/>
                     <figcaption>
                         <h5> {item.name} </h5>
-                        <p>{item.locations} địa điểm</p>
+                        <p> Địa điểm</p>
                     </figcaption>
                 </figure>
             </div>
@@ -57,7 +57,7 @@ class Poppular extends Component{
                 <div className="row justify-content-center">
                     <div className="col-md-5">
                         <div className="styled-heading">
-                            <h3>Địa điểm đến nổi tiếng</h3>
+                            <h3>Danh mục sách phổ biến</h3>
                         </div>
                     </div>
                 </div>

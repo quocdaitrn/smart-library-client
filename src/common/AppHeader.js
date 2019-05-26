@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import {
-    Link,
-    withRouter
+  Link,
+  withRouter
 } from 'react-router-dom';
 import './AppHeader.css';
-import { AppContext }  from "../app/context";
-import { Layout, Menu, Dropdown, Icon, Row, Col, Button} from 'antd';
+import { AppContext } from "../app/context";
+import { Layout, Menu, Dropdown, Icon, Row, Col, Button } from 'antd';
 import SearchBox from './SearchBox';
 
 const Header = Layout.Header;
 
 class AppHeader extends Component {
+
+  showModalLogin = () => {
+  };
+  showModalSignup = () => {
+  };
+
   constructor(props) {
     super(props);
     this.handleMenuClick = this.handleMenuClick.bind(this);
@@ -19,6 +25,9 @@ class AppHeader extends Component {
   handleMenuClick({ key }) {
     if (key === "logout") {
       this.props.onLogout();
+    }
+    if (key === "login") {
+      this.showModalLogin();
     }
   }
 
@@ -39,33 +48,53 @@ class AppHeader extends Component {
       ];
     } else {
       menuItems = [
-        <Menu.Item key="/login">
-          <Link to="/login">Login</Link>
+        <Menu.Item style={{ borderBottom: '0px solid red' }} onClick={() => { this.showModalLogin() }} key="login">
+          <Button type="primary">
+            Đăng nhập
+          </Button>
         </Menu.Item>,
-        <Menu.Item key="/signup">
-          <Link to="/signup">Signup</Link>
+        <Menu.Item style={{ borderBottom: '0px solid red' }} onClick={() => { this.showModalSignup() }} key="signup">
+          <Button type="primary">
+            Đăng ký
+          </Button>
         </Menu.Item>
       ];
     }
 
     return (
-      <Header className="app-header">
-        <div className="container">
-          <div className="app-title" >
-            <Link to="/">Smart Lib</Link>
-          </div>
-          <Menu
-            className="app-menu"
-            mode="horizontal"
-            selectedKeys={[this.props.location.pathname]}
-            style={{ lineHeight: '64px' }} >
-            {menuItems}
-          </Menu>
-        </div>
-      </Header>
+      <AppContext.Consumer>
+        {({ showModalLogin, showModalSignup }) => {
+          this.showModalLogin = showModalLogin;
+          this.showModalSignup = showModalSignup;
+          return (
+            <Header className="app-header">
+              <div className="container">
+                <Row>
+                  <Col span={4}>
+                    <div className="app-title" >
+                      <Link to="/"><Icon style={{ fontSize: 25, marginRight: 4 }} type="environment" /><span>SmartLib</span></Link>
+                    </div>
+                  </Col>
+                  <Col span={10}>
+                    <SearchBox></SearchBox>
+                  </Col>
+                  <Menu
+                    className="app-menu"
+                    mode="horizontal"
+                    // selectedKeys={[this.props.section.pathname]}
+                    style={{ lineHeight: '62px', borderBottom: '0px solid red' }} >
+                    {menuItems}
+                  </Menu>
+                </Row>
+              </div>
+            </Header>)
+        }}
+      </AppContext.Consumer>
     );
   }
 }
+
+AppHeader.contextType = AppContext;
 
 function ProfileDropdownMenu(props) {
   const dropdownMenu = (
@@ -80,7 +109,7 @@ function ProfileDropdownMenu(props) {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="profile" className="dropdown-item">
-        <Link to={`/users/${props.currentUser.username}`}>Profile</Link>
+        <Link to={`/users/${props.currentUser.username}`}>Trang cá nhân</Link>
       </Menu.Item>
       <Menu.Item key="logout" className="dropdown-item">
         Logout

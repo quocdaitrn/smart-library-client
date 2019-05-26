@@ -3,25 +3,25 @@ import { login } from '../../util/APIUtils';
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { ACCESS_TOKEN } from '../../constants';
-
 import { Form, Input, Button, Icon, notification } from 'antd';
 const FormItem = Form.Item;
 
 class Login extends Component {
+    constructor(props){
+        super(props);
+    }
+    
     render() {
         const AntWrappedLoginForm = Form.create()(LoginForm)
+        console.log(this.state);
         return (
-            <div className="login-container">
-                <h1 className="page-title">Login</h1>
-                <div className="login-content">
-                    <AntWrappedLoginForm onLogin={this.props.onLogin} />
-                </div>
-            </div>
+                <AntWrappedLoginForm onLogin={this.props.onLogin} />
         );
     }
 }
 
 class LoginForm extends Component {
+    state = { visible: true }
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -88,6 +88,5 @@ class LoginForm extends Component {
         );
     }
 }
-
 
 export default Login;
